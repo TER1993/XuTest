@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Activity20170426"></activity>
+        <activity android:name=".activity.Activity20170426" />
+        <activity android:name=".activity.Activity20170614"></activity>
     </application>
 
 </manifest>
