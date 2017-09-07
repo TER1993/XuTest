@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.speedata.xutest">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.Activity20170426" />
-        <activity android:name=".activity.Activity20170614"></activity>
+        <activity android:name=".activity.Activity20170614" />
+        <activity android:name=".activity.Activity20170907"></activity>
     </application>
 
 </manifest>

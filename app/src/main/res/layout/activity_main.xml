@@ -6,27 +6,40 @@
     android:layout_height="match_parent"
     tools:context="com.speedata.xutest.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
     <Button
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
         android:text="20170426"
         android:id="@+id/btn_20170426"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
     <Button
+        app:layout_constraintBottom_toBottomOf="@+id/btn_20170426"
         android:text="20170614"
         android:id="@+id/btn_20170614"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="48dp"
+        tools:layout_editor_absoluteY="121dp"
         tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        app:layout_constraintBottom_toBottomOf="@+id/btn_20170614"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="231dp"
+        android:text="20170907"
+        android:id="@+id/btn_20170907"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
