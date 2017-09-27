@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SyncItemView">
+        <attr name="cb_title" format="string"/>
+        <attr name="p_visible" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="AddAssetsView">
+        <attr name="av_title" format="string"/>
+        <attr name="av_clickable" format="boolean"/>
+        <attr name="et_type">
+            <enum name="number" value="0"/>
+            <enum name="text" value="1"/>
+            <enum name="time" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

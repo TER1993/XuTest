@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="display_result_text_color">#6C000000</color>
+    <color name="click_normal">#ededed</color>
+    <color name="light_blue">#0599F5</color>
+    <color name="blue_button">#29B6F6</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#3CB371</color>
+    <color name="color_80323232">#80323232</color>
+    <color name="color_dark_button">#aaa</color>
 </resources>

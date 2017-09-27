@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.speedata.xutest.MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+    <Button
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:text="20170426多数组最小和"
+        android:id="@+id/btn_20170426"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        app:layout_constraintBottom_toBottomOf="@+id/btn_20170426"
+        android:text="20170614侧键读mifare"
+        android:id="@+id/btn_20170614"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        app:layout_constraintBottom_toBottomOf="@+id/btn_20170614"
+        android:text="20170907扫描示例demo"
+        android:id="@+id/btn_20170907"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+     <Button
+         app:layout_constraintBottom_toBottomOf="@+id/btn_20170907"
+         android:text="20170927GreenDao示例demo"
+         android:id="@+id/btn_20170927"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

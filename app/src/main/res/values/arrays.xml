@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_tabs">
+        <item>资产</item>
+        <item>盘点</item>
+        <item>设置</item>
+        <item>同步</item>
+    </string-array>
+
+    <string-array name="inventory_tabs">
+        <item>待盘点</item>
+        <item>已盘点</item>
+    </string-array>
+    <string-array name="status">
+        <item>在库 </item>
+        <item>在用 </item>
+        <item>维修</item>
+        <item>报废</item>
+    </string-array>
+
+
+</resources>
