@@ -8,5 +8,5 @@ package com.speedata.xutest.add;
 public interface IAddView {
     void completeCommit(int code, AddResultEntity entity, Throwable throwable);
 
-    void completeSelect(int id, String content);
+    void completeSelect(int id, SelectEntity entity);
 }

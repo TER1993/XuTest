@@ -227,6 +227,9 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
             //显示projid对应内容
             for (int i = 0; i < projListBeanlist.size(); i++){
                 List<EquipmentListEntity> equipmentListEntity = GreenDaoManager.getEquipmentListByProjid(projListBeanlist.get(i).getProjId());
+                for (int j = 0; j < equipmentListEntity.size(); j++){
+                    equipmentListEntity.get(j).setOverageOrLoss(0); //新的显示初始化后都是0，亏盈记录在保存的上传盘点单中
+                }
                 mList.addAll(equipmentListEntity);
             }
 

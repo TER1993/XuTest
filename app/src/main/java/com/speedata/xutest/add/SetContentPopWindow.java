@@ -78,7 +78,7 @@ class SetContentPopWindow extends PopupWindow {
         }
         mAdapter.replaceData(mList);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            iAddView.completeSelect(id, mList.get(position).getCode());
+            iAddView.completeSelect(id, mList.get(position));
             dismiss();
         });
         this.setContentView(mView);

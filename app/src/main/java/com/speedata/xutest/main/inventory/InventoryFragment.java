@@ -25,6 +25,7 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
 
     private CheckAdapter mAdapter;
     private Button btnUpdate;
+    private boolean update;
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -47,6 +48,7 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
 
+        update = false;
         btnUpdate = view.findViewById(R.id.btn_update_check);
         btnUpdate.setOnClickListener(this);
 
@@ -63,6 +65,7 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
        switch (v.getId()){
            case R.id.btn_update_check: //更新盘点任务
                mPresenter.getCheckListBean();
+               update = true;
                break;
        }
     }
@@ -78,6 +81,10 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
         if ("1".equals(entity.getErrCode())) {
             mAdapter.replaceData(entity.getCheckListBean());
             GreenDaoManager.saveCheckListBean(entity.getCheckListBean());
+            if (update){
+                ToastUtils.showShortToastSafe("下载" + entity.getCheckListBean().size() + "个盘点任务");
+                update = false;
+            }
         } else {
             ToastUtils.showShortToastSafe(entity.getErrMsg());
         }

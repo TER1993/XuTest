@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ddd"
     android:orientation="vertical"
-    tools:context="com.spd.rfid.inventory.TakeInventoryActivity">
+    tools:context="com.speedata.xutest.inventory.TakeInventoryActivity">
 
     <TextView
         android:id="@+id/tv_inventory_name"

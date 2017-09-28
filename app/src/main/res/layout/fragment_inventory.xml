@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#ddd"
     android:orientation="vertical"
-             tools:context="com.spd.rfid.main.inventory.InventoryFragment">
+             tools:context="com.speedata.xutest.main.inventory.InventoryFragment">
 
     <Button
         android:id="@+id/btn_update_check"

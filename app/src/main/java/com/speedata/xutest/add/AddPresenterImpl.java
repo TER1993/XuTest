@@ -41,7 +41,7 @@ public class AddPresenterImpl extends BaseMvpPresenter<AddAssetsActivity> implem
                 TextUtils.isEmpty(ProjId) || TextUtils.isEmpty(TotalAmount) ||
                 TextUtils.isEmpty(User) || TextUtils.isEmpty(Manufacturer) ||
                 TextUtils.isEmpty(AssetsCate) || TextUtils.isEmpty(deptId) ||
-                TextUtils.isEmpty(EqStatus) || TextUtils.isEmpty(EqMemo)) {
+                TextUtils.isEmpty(EqStatus)) {
             ToastUtils.showShortToastSafe(R.string.content_null);
             return;
         }

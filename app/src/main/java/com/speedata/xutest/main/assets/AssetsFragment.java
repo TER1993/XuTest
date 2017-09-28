@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -28,10 +28,11 @@ import java.util.List;
  *         功能描述:资产
  */
 public class AssetsFragment extends BaseMvpFragment<AssetsFragment, AssetsPresenterImpl> implements
-        IAssetsView, BaseQuickAdapter.OnItemClickListener, OnRefreshListener, SearchView.OnQueryTextListener {
+        IAssetsView, BaseQuickAdapter.OnItemClickListener, OnRefreshListener, View.OnClickListener {
 
     private AssetsAdapter mAdapter;
     private SmartRefreshLayout mRefreshLayout;
+    private EditText mEtName;
 
     public AssetsFragment() {
 
@@ -54,9 +55,8 @@ public class AssetsFragment extends BaseMvpFragment<AssetsFragment, AssetsPresen
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(mAdapter);
         mRefreshLayout = view.findViewById(R.id.srl_content);
-        SearchView mSearchView = view.findViewById(R.id.sv_by_name);
-        mSearchView.setSubmitButtonEnabled(true);
-        mSearchView.setOnQueryTextListener(this);
+        mEtName = view.findViewById(R.id.et_name);
+        view.findViewById(R.id.img_search).setOnClickListener(this);
         mAdapter.setOnItemClickListener(this);
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.autoRefresh();
@@ -104,14 +104,16 @@ public class AssetsFragment extends BaseMvpFragment<AssetsFragment, AssetsPresen
         mPresenter.getEquipmentList();
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        mPresenter.searchByTitle(query);
-        return false;
-    }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_search:
+                mPresenter.searchByTitle(mEtName.getText().toString().trim());
+                break;
+
+            default:
+                break;
+        }
     }
 }

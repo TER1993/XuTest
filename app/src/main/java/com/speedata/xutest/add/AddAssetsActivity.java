@@ -51,6 +51,13 @@ public class AddAssetsActivity extends BaseMvpActivity<AddAssetsActivity, AddPre
 
     private IUHFService mUhfService;
 
+
+    private String assentStatus;
+    private String avGyName;
+    private String avAssetsLocation;
+    private String avAssetsCate;
+    private String avDept;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,10 +145,10 @@ public class AddAssetsActivity extends BaseMvpActivity<AddAssetsActivity, AddPre
             case R.id.btn_upload:
                 mPresenter.commit(mAvDzCode.getText(), mAvSbName.getText(), mAvSbModel.getText(), mAvLxYear.getText().toString(),
                         mAvQrNumber.getText(), mAvSbPrice.getText(), mAvHtDate.getText().toString(), mAvZbDate.getText()
-                        , mAvChNumber.getText(), mAvPlArea.getText(), mAvGyName.getText().toString(), mAvDaNumber.getText()
-                        , mAvAssetsLocation.getText().toString(), mAvAssetsCount.getText(), mAvGlPeople.getText()
-                        , mAvScName.getText(), mAvAssetsStatus.getText().toString(), mAvAssetsMark.getText(),
-                        mAvAssetsCate.getText().toString(), mAvDept.getText().toString());
+                        , mAvChNumber.getText(), mAvPlArea.getText(), avGyName, mAvDaNumber.getText()
+                        , avAssetsLocation, mAvAssetsCount.getText(), mAvGlPeople.getText()
+                        , mAvScName.getText(), assentStatus, mAvAssetsMark.getText(),
+                        avAssetsCate, avDept);
                 break;
             case R.id.av_lx_year:
                 showDataDialog(R.id.av_lx_year);
@@ -189,28 +196,35 @@ public class AddAssetsActivity extends BaseMvpActivity<AddAssetsActivity, AddPre
     }
 
     @Override
-    public void completeSelect(int id, String content) {
+    public void completeSelect(int id, SelectEntity content) {
         switch (id) {
             case R.id.av_assets_status:
-                if (!content.equals("5")) {
-                    mAvDept.setText("0");
+                if (!content.getCode().equals("5")) {
+                    mAvDept.setText("");
+                    avDept = "0";
                 }
-                if (!content.equals("1")) {
-                    mAvAssetsLocation.setText("0");
+                if (!content.getCode().equals("1")) {
+                    mAvAssetsLocation.setText("");
+                    avAssetsLocation = "0";
                 }
-                mAvAssetsStatus.setText(content);
+                assentStatus = content.getCode();
+                mAvAssetsStatus.setText(content.getShow());
                 break;
             case R.id.av_gy_name:
-                mAvGyName.setText(content);
+                avGyName = content.getCode();
+                mAvGyName.setText(content.getShow());
                 break;
             case R.id.av_assets_location:
-                mAvAssetsLocation.setText(content);
+                avAssetsLocation = content.getCode();
+                mAvAssetsLocation.setText(content.getShow());
                 break;
             case R.id.av_assets_cate:
-                mAvAssetsCate.setText(content);
+                avAssetsCate = content.getCode();
+                mAvAssetsCate.setText(content.getShow());
                 break;
             case R.id.av_dept:
-                mAvDept.setText(content);
+                avDept = content.getCode();
+                mAvDept.setText(content.getShow());
                 break;
 
             default:

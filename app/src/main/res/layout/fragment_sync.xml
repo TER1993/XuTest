@@ -4,49 +4,49 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.spd.rfid.main.sync.SyncFragment">
+              tools:context="com.speedata.xutest.main.sync.SyncFragment">
 
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/load_assets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_title="@string/download_assets"
         app:p_visible="false"/>
 
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/load_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_title="@string/download_user_info"
         app:p_visible="false"/>
 
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/load_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_title="@string/download_assets_location"
         app:p_visible="false"/>
 
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/load_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_title="@string/download_assets_status"
         app:p_visible="false"/>
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/load_supplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_title="@string/download_supplier"
         app:p_visible="false"/>
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/load_dept"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cb_title="@string/download_dept"
         app:p_visible="false"/>
 
-    <com.spd.rfid.main.sync.SyncItemView
+    <com.speedata.xutest.main.sync.SyncItemView
         android:id="@+id/upload_assets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

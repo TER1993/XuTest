@@ -6,27 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context="com.spd.rfid.add.AddAssetsActivity">
+    tools:context="com.speedata.xutest.add.AddAssetsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_dz_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_clickable="false"
             app:av_title="@string/dz_code"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_sb_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_title="@string/sb_name"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_sb_model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,13 +55,13 @@
                 android:hint="@null"/>
         </LinearLayout>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_qr_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_title="@string/qr_number"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_sb_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,19 +90,19 @@
                 android:hint="@null"/>
         </LinearLayout>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_zb_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_title="@string/zb_date"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_ch_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_title="@string/ch_number"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_pl_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                 android:hint="@null"/>
         </LinearLayout>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_da_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -207,20 +207,20 @@
                 android:hint="@null"/>
         </LinearLayout>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_assets_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_title="@string/assets_count"
             app:et_type="number"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_gl_people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:av_title="@string/gl_people"/>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_sc_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                 android:hint="@null"/>
         </LinearLayout>
 
-        <com.spd.rfid.add.AddAssetsView
+        <com.speedata.xutest.add.AddAssetsView
             android:id="@+id/av_assets_mark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
