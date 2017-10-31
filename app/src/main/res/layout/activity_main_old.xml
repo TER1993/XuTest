@@ -37,6 +37,7 @@
         android:layout_height="wrap_content" />
 
      <Button
+         android:visibility="gone"
          app:layout_constraintBottom_toBottomOf="@+id/btn_20170907"
          android:text="20170927GreenDao示例demo"
          android:id="@+id/btn_20170927"

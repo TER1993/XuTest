@@ -106,6 +106,8 @@ public class CheckDetailsActivity extends BaseActivity implements View.OnClickLi
         tevCheckPerson.setViewContent(mEntity.getChkAccount());
         tevCheckPerson.setViewEnable(false);
 
+
+
         List<EqListBean> eqList = GreenDaoManager.getEqListBeanByUniqueNum(mEntity.getId());
         List<ProjListBean> projList = GreenDaoManager.getProjListBeanByUniqueNum(mEntity.getId());
 

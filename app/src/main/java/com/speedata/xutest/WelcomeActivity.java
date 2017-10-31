@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
-import com.speedata.xutest.login.LoginActivity;
 import com.speedata.xutest.net.Constant;
 import com.speedata.xutest.utils.SPUtils;
 
@@ -22,7 +21,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String token = (String) SPUtils.get(this, Constant.TOKEN,"");
         if (TextUtils.isEmpty(token)){
-            startActivity(new Intent(this, LoginActivity.class));
+            //startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
+
         }else {
             startActivity(new Intent(this, com.speedata.xutest.main.MainActivity.class));
         }
