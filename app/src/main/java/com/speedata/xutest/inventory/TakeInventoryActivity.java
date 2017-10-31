@@ -2,6 +2,7 @@ package com.speedata.xutest.inventory;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,11 +25,10 @@ import com.speedata.utils.MyDateAndTime;
 import com.speedata.xutest.R;
 import com.speedata.xutest.base.AppFid;
 import com.speedata.xutest.base.BaseMvpActivity;
-import com.speedata.xutest.datebase.EqListBean;
+import com.speedata.xutest.datebase.CheckListBeanEntity;
 import com.speedata.xutest.datebase.EqListEntity;
 import com.speedata.xutest.datebase.EquipmentListEntity;
 import com.speedata.xutest.datebase.GreenDaoManager;
-import com.speedata.xutest.datebase.ProjListBean;
 import com.speedata.xutest.datebase.UploadRptChkInfoListEntity;
 import com.speedata.xutest.main.assets.details.EquipmentDetailsActivity;
 import com.speedata.xutest.net.Constant;
@@ -45,6 +45,7 @@ import java.util.List;
  *         联系方式:QQ:282921012
  *         功能描述:
  */
+@SuppressWarnings("ALL")
 public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity, TakePresenterImpl> implements ITakeView, BaseQuickAdapter.OnItemClickListener, View.OnClickListener, IUHFService.Listener {
 
     private TextView tvName;
@@ -76,11 +77,6 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
     private String mChkid; //盘点单chkid，盘点单主要的属性
     private boolean mIsEq; //判断是有Eqlist有设备Eid还是projlist有库房的位置id
     private boolean mIsDone; //判断是否是已盘点的盘点单进来
-
-    //两种情况2种list
-    private List<EqListBean> eqListBeanlist;
-    private List<ProjListBean> projListBeanlist;
-
     private List<EquipmentListEntity> mList;
 
     private TakeInventoryAdapter mAdapter;
@@ -91,6 +87,25 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
 
     private String mEPC = ""; //记录扫描结果，重复的不查数据库
 
+    private Drawable drawable;
+    private CheckListBeanEntity mEntity;
+    private String ChkName;
+    private String ChkAccount;
+    private String ChkId;
+
+    /**
+     * start。
+     *
+     * @param context context
+     *
+     */
+    public static void start(Context context, CheckListBeanEntity checkListBeanEntity, boolean iseq, boolean isdone) {
+        Intent intent = new Intent(context, TakeInventoryActivity.class);
+        intent.putExtra(ENTITY, checkListBeanEntity);
+        intent.putExtra(ISEQ, iseq);
+        intent.putExtra(ISDONE, isdone);
+        context.startActivity(intent);
+    }
 
     /**
      * start。
@@ -99,35 +114,36 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
      * @param name    盘点单名称
      * @param user    盘点人
      */
-    public static void start(Context context, String name, String user, Long id, String chkid, boolean iseq, boolean isdone) {
+    public static void start(Context context, String name, String user, String chkid, boolean iseq, boolean isdone) {
         Intent intent = new Intent(context, TakeInventoryActivity.class);
         intent.putExtra(NAME, name);
         intent.putExtra(USER, user);
-        intent.putExtra(ID, id);
         intent.putExtra(CHKID, chkid);
         intent.putExtra(ISEQ, iseq);
         intent.putExtra(ISDONE, isdone);
-
         context.startActivity(intent);
     }
 
-    private static final String NAME = "name";
-    private static final String USER = "user";
-    private static final String ID = "id";
-    private static final String CHKID = "chkid";
+
     private static final String ISEQ = "iseq";
     private static final String ISDONE = "isdone";
+    private static final String ENTITY = "entity";
+    private static final String NAME = "name";
+    private static final String USER = "user";
+    private static final String CHKID = "chkid";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_inventory);
-        mName = getIntent().getStringExtra(NAME);
-        mAccount = getIntent().getStringExtra(USER);
-        mIsEq = getIntent().getBooleanExtra(ISEQ, false);
-        mID = getIntent().getLongExtra(ID, -1);
-        mChkid = getIntent().getStringExtra(CHKID);
         mIsDone = getIntent().getBooleanExtra(ISDONE, false);
+        mEntity = (CheckListBeanEntity) getIntent().getSerializableExtra(ENTITY);
+        ChkName = mIsDone ? getIntent().getStringExtra(NAME) : mEntity.getChkName();
+        ChkAccount = mIsDone ? getIntent().getStringExtra(USER) : mEntity.getChkAccount();
+        ChkId = mIsDone ? getIntent().getStringExtra(CHKID) : mEntity.getChkId();
+
+        mIsEq = getIntent().getBooleanExtra(ISEQ, false);
 
         try {
             mUhfService = UHFManager.getUHFService(this);
@@ -199,18 +215,29 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
         ibOver.setBackground(getDrawable(R.drawable.ic_stop_unclick));
         btnUpload.setEnabled(false);
 
+        drawable = btnUpload.getBackground();
+        btnUpload.setBackgroundColor(getResources().getColor(R.color.color_dark_button));
+
         mList = new ArrayList<>();
 
+        String mTotal;
         if (!mIsDone){
             //不是已盘点，就正常判断2种盘点方法
 
         if (mIsEq){ //有设备的Eid列表
             //根据id查eid设备列表
-            eqListBeanlist = GreenDaoManager.getEqListBeanByUniqueNum(mID);
+           // eqListBeanlist = GreenDaoManager.getEqListBeanByUniqueNum(mID);
 
             //显示eqid对应的信息
-            for (int i = 0; i < eqListBeanlist.size(); i++){
-                EquipmentListEntity equipmentListEntity = GreenDaoManager.getEquipmentByEid(eqListBeanlist.get(i).getEqId());
+            for (int i = 0; i < mEntity.getEqList().size(); i++) {
+                EquipmentListEntity equipmentListEntity = GreenDaoManager.getEquipmentByEid(mEntity.getEqList().get(i).getEqId());
+                if(equipmentListEntity == null){
+                    ToastUtils.showLongToastSafe("当前显示不全，原因是包含了资产信息里不存在的eid，请与管理员联系。");
+                    Logcat.d(TAG, "查不到的eid： " + mEntity.getEqList().get(i).getEqId());
+
+                    return;
+                }
+
                 equipmentListEntity.setOverageOrLoss(0); //新的显示初始化后都是0，亏盈记录在保存的上传盘点单中
                 mList.add(equipmentListEntity);
             }
@@ -221,13 +248,13 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
 
         } else { //有仓库的位置列表projlist
             //根据id查eid设备列表
-            projListBeanlist = GreenDaoManager.getProjListBeanByUniqueNum(mID);
+           // projListBeanlist = GreenDaoManager.getProjListBeanByUniqueNum(mID);
             //根据库房查资产
 
             //显示projid对应内容
-            for (int i = 0; i < projListBeanlist.size(); i++){
-                List<EquipmentListEntity> equipmentListEntity = GreenDaoManager.getEquipmentListByProjid(projListBeanlist.get(i).getProjId());
-                for (int j = 0; j < equipmentListEntity.size(); j++){
+            for (int i = 0; i < mEntity.getProjList().size(); i++) {
+                List<EquipmentListEntity> equipmentListEntity = GreenDaoManager.getEquipmentListByProjid(mEntity.getProjList().get(i).getProjId());
+                for (int j = 0; j < equipmentListEntity.size(); j++) {
                     equipmentListEntity.get(j).setOverageOrLoss(0); //新的显示初始化后都是0，亏盈记录在保存的上传盘点单中
                 }
                 mList.addAll(equipmentListEntity);
@@ -238,7 +265,8 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
             mAdapter.replaceData(mList);
         }
 
-        //列表显示完了，则先显示盘亏这一条为list.size
+
+            //列表显示完了，则先显示盘亏这一条为list.size
         mTotal = "资产总数：" + mInitTotal;
         tvAssets.setText(mTotal);
         mLoss = mInitTotal;
@@ -247,7 +275,6 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
         } else { //从已盘点页面进来，不需要开始结束再盘点。按需保留上传按钮即可
 
             UploadRptChkInfoListEntity listEntities = new UploadRptChkInfoListEntity();
-            listEntities = GreenDaoManager.getUploadRptChkInfoByChkid(mChkid); //当前的
             List<EqListEntity> eqList = listEntities.getEqList(); //获取子list信息
 
             mTime = listEntities.getChkDate();
@@ -271,13 +298,25 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
 
             } else {
                 btnUpload.setEnabled(true);
+                btnUpload.setBackground(drawable);
                 tvOver.setText("未上传");
             }
 
-            for (int i = 0; i < eqList.size(); i++){
+            for (int i = 0; i < eqList.size(); i++) {
                 EquipmentListEntity equipmentListEntity = GreenDaoManager.getEquipmentByEid(eqList.get(i).getEid());
+                if (equipmentListEntity == null) {
+                    equipmentListEntity = new EquipmentListEntity();
+                    equipmentListEntity.setRfid(eqList.get(i).getRfid());
+                    equipmentListEntity.setEid(eqList.get(i).getEid());
+                    equipmentListEntity.setEquipmentTitle("无相关设备");
+                }
+                //未保存进去的
+                equipmentListEntity.setOverageOrLoss(Integer.parseInt(eqList.get(i).getChkStatus()!=null?eqList.get(i).getChkStatus():"0"));
+
                 mList.add(equipmentListEntity);
             }
+
+
 
             mInitTotal = Integer.parseInt(listEntities.getAllCount());
             //mList是所有资产内容
@@ -323,14 +362,17 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
 
             case R.id.ib_over: //结束盘点按钮，结束盘点
 
-                ibStart.setBackground(getDrawable(R.drawable.ic_start));
-                ibStart.setEnabled(true);
+                //ibStart.setBackground(getDrawable(R.drawable.ic_start));
+                //ibStart.setEnabled(true);
                 ibOver.setBackground(getDrawable(R.drawable.ic_stop_unclick));
                 ibOver.setEnabled(false);
 
                 btnUpload.setEnabled(true);
+                btnUpload.setBackground(drawable);
 
                 mEPC = ""; //结束后清掉EPC记录
+
+                //再启动service
                 new Thread(() -> {
                     mUhfService.inventory_stop();
                     mUhfService.CloseDev();
@@ -348,6 +390,8 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
 
                 break;
 
+                default:
+                    break;
         }
     }
 
@@ -435,12 +479,13 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
                 if (equipmentListEntity == null){
 
                     new Handler(Looper.getMainLooper()).post(() -> ToastUtils.showShortToast("此标签不在资产范围内"));
-
-                    //此为盘盈，做个显示即可
-                    equipmentListEntity = new EquipmentListEntity();
-                    equipmentListEntity.setEid("0");
-                    equipmentListEntity.setRfid(var1.epc);
-                    equipmentListEntity.setEquipmentTitle("无相关设备");
+                    mEPC = var1.epc;
+                    return;
+//                    //此为盘盈，做个显示即可
+//                    equipmentListEntity = new EquipmentListEntity();
+//                    equipmentListEntity.setEid("0");
+//                    equipmentListEntity.setRfid(var1.epc);
+//                    equipmentListEntity.setEquipmentTitle("无相关设备");
 
                 }
                 equipmentListEntity.setOverageOrLoss(1); //盘盈
@@ -467,7 +512,11 @@ public class TakeInventoryActivity extends BaseMvpActivity<TakeInventoryActivity
         if (entity.getUploadAlready()) {
             ToastUtils.showShortToastSafe("上传成功");
             //操作数据库 mID
-            GreenDaoManager.delCheckListById(mID);
+            //GreenDaoManager.delCheckListById(mID);
+            //成功上传后，修改按钮状态
+            new Handler(Looper.getMainLooper()).post(() -> btnUpload.setEnabled(false));
+            new Handler(Looper.getMainLooper()).post(() -> btnUpload.setBackgroundColor(getResources().getColor(R.color.color_dark_button)));
+            new Handler(Looper.getMainLooper()).post(() -> tvOver.setText("已上传"));
 
         } else {
             ToastUtils.showShortToastSafe("上传失败");

@@ -24,7 +24,7 @@ import java.util.List;
  *  根据盘点结果显示当前已保存的盘点单
  */
 
-public class InventoryDoneFragment extends BaseMvpFragment<InventoryDoneFragment, InventoryDonePresenterImpl> implements IInventoryDoneCheckView, BaseQuickAdapter.OnItemChildClickListener {
+public class InventoryDoneFragment extends BaseMvpFragment<InventoryDoneFragment, InventoryDonePresenterImpl> implements IInventoryDoneCheckView, BaseQuickAdapter.OnItemChildClickListener, BaseQuickAdapter.OnItemClickListener {
 
     private DoneAdapter mAdapter;
     private AlertDialog mDialog;
@@ -53,7 +53,7 @@ public class InventoryDoneFragment extends BaseMvpFragment<InventoryDoneFragment
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener(this);
-
+        mAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -72,6 +72,13 @@ public class InventoryDoneFragment extends BaseMvpFragment<InventoryDoneFragment
 
         mAdapter.replaceData(entity);
 
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        UploadRptChkInfoListEntity mEntity = mAdapter.getData().get(position); //根据当前选择进行数据整理
+
+        TakeInventoryActivity.start(this.getContext(), mEntity.getChechName(), mEntity.getChkAccount(), mEntity.getChkId(), true, true);
     }
 
     /**
@@ -95,6 +102,9 @@ public class InventoryDoneFragment extends BaseMvpFragment<InventoryDoneFragment
                     mDialog.dismiss();
 
                     break;
+
+                    default:
+                        break;
             }
         }
     }
@@ -129,17 +139,16 @@ public class InventoryDoneFragment extends BaseMvpFragment<InventoryDoneFragment
 
                 UploadRptChkInfoListEntity mEntity = mAdapter.getData().get(position); //根据当前选择进行数据整理
 
-                TakeInventoryActivity.start(this.getContext(), mEntity.getChechName(), mEntity.getChkAccount(), mEntity.getId(), mEntity.getChkId(), true, true);
+                TakeInventoryActivity.start(this.getContext(), mEntity.getChechName(), mEntity.getChkAccount(), mEntity.getChkId(), true, true);
             }
-                break;
-
-
+            break;
             case R.id.tv_done_state: {
-
                 UploadRptChkInfoListEntity mEntity = mAdapter.getData().get(position); //根据当前选择进行数据整理
-
-                TakeInventoryActivity.start(this.getContext(), mEntity.getChechName(), mEntity.getChkAccount(), mEntity.getId(), mEntity.getChkId(), true, true);
+                TakeInventoryActivity.start(this.getContext(), mEntity.getChechName(), mEntity.getChkAccount(), mEntity.getChkId(), true, true);
             }
+            break;
+
+            default:
                 break;
 
         }

@@ -92,31 +92,31 @@ public class GreenDaoManager {
     }
 
 
-    /**
-     * 保存盘点任务及下属两个list的信息列表
-     *
-     * @param list 盘点任务信息列表
-     */
-    public static void saveCheckListBean(List<CheckListBeanEntity> list) {
-        sDaoSession.getCheckListBeanEntityDao().insertOrReplaceInTx(list);
-        List<CheckListBeanEntity> mList = sDaoSession.getCheckListBeanEntityDao().loadAll();
-        for (int i = 0; i < list.size(); i++){
-            List<ProjListBean> projList = list.get(i).getProjList(); //获取list的内list
-            List<EqListBean> eqList =  list.get(i).getEqList();
-            if (projList.size()!=0) {
-                for (int j = 0; j < projList.size(); j++){
-                    projList.get(j).setUniqueNum(mList.get(i).getId());
-                }
-                sDaoSession.getProjListBeanDao().insertOrReplaceInTx(projList);
-            }
-            if (eqList.size()!=0){
-                for (int k = 0; k < eqList.size(); k++){
-                    eqList.get(k).setUniqueNum(mList.get(i).getId());
-                }
-            sDaoSession.getEqListBeanDao().insertOrReplaceInTx(eqList);
-            }
-        }
-    }
+//    /**
+//     * 保存盘点任务及下属两个list的信息列表
+//     *
+//     * @param list 盘点任务信息列表
+//     */
+//    public static void saveCheckListBean(List<CheckListBeanEntity> list) {
+//        sDaoSession.getCheckListBeanEntityDao().insertOrReplaceInTx(list);
+//        List<CheckListBeanEntity> mList = sDaoSession.getCheckListBeanEntityDao().loadAll();
+//        for (int i = 0; i < list.size(); i++){
+//            List<ProjListBean> projList = list.get(i).getProjList(); //获取list的内list
+//            List<EqListBean> eqList =  list.get(i).getEqList();
+//            if (projList.size()!=0) {
+//                for (int j = 0; j < projList.size(); j++){
+//                    projList.get(j).setUniqueNum(mList.get(i).getId());
+//                }
+//                sDaoSession.getProjListBeanDao().insertOrReplaceInTx(projList);
+//            }
+//            if (eqList.size()!=0){
+//                for (int k = 0; k < eqList.size(); k++){
+//                    eqList.get(k).setUniqueNum(mList.get(i).getId());
+//                }
+//            sDaoSession.getEqListBeanDao().insertOrReplaceInTx(eqList);
+//            }
+//        }
+//    }
 
 
     /**
@@ -201,36 +201,36 @@ public class GreenDaoManager {
     }
 
 
-    /**
-     * 根据盘点单id查找.
-     *
-     * @param chkid 盘点单id
-     * @return 盘点单
-     */
-    public static CheckListBeanEntity getCheckListBeanByEid(String chkid) {
-        return sDaoSession.getCheckListBeanEntityDao().queryBuilder().where(CheckListBeanEntityDao.Properties.ChkId.like(chkid)).unique();
-    }
+//    /**
+//     * 根据盘点单id查找.
+//     *
+//     * @param chkid 盘点单id
+//     * @return 盘点单
+//     */
+//    public static CheckListBeanEntity getCheckListBeanByEid(String chkid) {
+//        return sDaoSession.getCheckListBeanEntityDao().queryBuilder().where(CheckListBeanEntityDao.Properties.ChkId.like(chkid)).unique();
+//    }
 
 
-    /**
-     * 根据uniqueNum查eqlist盘点单id符合的内容.
-     *
-     * @param uniqueNum 盘点单详情uniqueNum
-     * @return 盘点单要查的部分
-     */
-    public static List<EqListBean> getEqListBeanByUniqueNum(Long uniqueNum) {
-        return sDaoSession.getEqListBeanDao()._queryCheckListBeanEntity_EqList(uniqueNum);
-    }
+//    /**
+//     * 根据uniqueNum查eqlist盘点单id符合的内容.
+//     *
+//     * @param uniqueNum 盘点单详情uniqueNum
+//     * @return 盘点单要查的部分
+//     */
+//    public static List<EqListBean> getEqListBeanByUniqueNum(Long uniqueNum) {
+//        return sDaoSession.getEqListBeanDao()._queryCheckListBeanEntity_EqList(uniqueNum);
+//    }
 
-    /**
-     * 根据uniqueNum查projlist盘点单id符合的内容.
-     *
-     * @param uniqueNum 盘点单详情uniqueNum
-     * @return 盘点单要查的部分
-     */
-    public static List<ProjListBean> getProjListBeanByUniqueNum(Long uniqueNum) {
-        return sDaoSession.getProjListBeanDao()._queryCheckListBeanEntity_ProjList(uniqueNum);
-    }
+//    /**
+//     * 根据uniqueNum查projlist盘点单id符合的内容.
+//     *
+//     * @param uniqueNum 盘点单详情uniqueNum
+//     * @return 盘点单要查的部分
+//     */
+//    public static List<ProjListBean> getProjListBeanByUniqueNum(Long uniqueNum) {
+//        return sDaoSession.getProjListBeanDao()._queryCheckListBeanEntity_ProjList(uniqueNum);
+//    }
 
     /**
      * 根据projlist查找显示内容.
@@ -302,18 +302,18 @@ public class GreenDaoManager {
     }
 
 
-    /**
-     * 删除本地已上传盘点单.
-     */
-    public static void delCheckListById(Long id) {
-
-        //先删除它关联的子表
-        List<EqListBean> eqlist = sDaoSession.getEqListBeanDao()._queryCheckListBeanEntity_EqList(id);
-        List<ProjListBean> projlist = sDaoSession.getProjListBeanDao()._queryCheckListBeanEntity_ProjList(id);
-        sDaoSession.getEqListBeanDao().deleteInTx(eqlist);
-        sDaoSession.getProjListBeanDao().deleteInTx(projlist);
-        sDaoSession.getCheckListBeanEntityDao().deleteByKeyInTx(id);
-    }
+//    /**
+//     * 删除本地已上传盘点单.
+//     */
+//    public static void delCheckListById(Long id) {
+//
+//        //先删除它关联的子表
+//        List<EqListBean> eqlist = sDaoSession.getEqListBeanDao()._queryCheckListBeanEntity_EqList(id);
+//        List<ProjListBean> projlist = sDaoSession.getProjListBeanDao()._queryCheckListBeanEntity_ProjList(id);
+//        sDaoSession.getEqListBeanDao().deleteInTx(eqlist);
+//        sDaoSession.getProjListBeanDao().deleteInTx(projlist);
+//        sDaoSession.getCheckListBeanEntityDao().deleteByKeyInTx(id);
+//    }
 
 
 

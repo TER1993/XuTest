@@ -47,16 +47,17 @@ public class CheckDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private static final String INTENT_NAME = "cid";
 
-    public static void start(Context context, String chkid) {
+    public static void  start(Context context,  CheckListBeanEntity checkListBeanEntity) {
         Intent intent = new Intent(context, CheckDetailsActivity.class);
-        intent.putExtra(INTENT_NAME, chkid);
+        intent.putExtra(INTENT_NAME, checkListBeanEntity);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        chkid = getIntent().getStringExtra(INTENT_NAME);
+        mEntity = (CheckListBeanEntity) getIntent().getSerializableExtra(INTENT_NAME);
+        setView();
     }
 
     @Override
@@ -64,12 +65,6 @@ public class CheckDetailsActivity extends BaseActivity implements View.OnClickLi
         return R.layout.activity_check_details;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mEntity = GreenDaoManager.getCheckListBeanByEid(chkid);
-        setView();
-    }
 
 
     @Override
@@ -108,10 +103,8 @@ public class CheckDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
 
-        List<EqListBean> eqList = GreenDaoManager.getEqListBeanByUniqueNum(mEntity.getId());
-        List<ProjListBean> projList = GreenDaoManager.getProjListBeanByUniqueNum(mEntity.getId());
-
-
+        List<EqListBean> eqList = mEntity.getEqList();
+        List<ProjListBean> projList = mEntity.getProjList();
         if (eqList.size() != 0){ //资产范围
             isEq = true;
             tvRoomMessage.setVisibility(View.GONE);
@@ -151,8 +144,11 @@ public class CheckDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
 
                 //进入盘点页
-                TakeInventoryActivity.start(this,mEntity.getChkName(),mEntity.getChkAccount(), mEntity.getId(), chkid, isEq, false);
+                TakeInventoryActivity.start(this, mEntity, isEq, false);
                 break;
+
+                default:
+                    break;
         }
 
     }

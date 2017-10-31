@@ -3,15 +3,12 @@ package com.speedata.xutest.main.inventory;
 import com.google.gson.Gson;
 import com.speedata.xutest.base.AppFid;
 import com.speedata.xutest.base.BaseMvpPresenter;
-import com.speedata.xutest.datebase.CheckListBeanEntity;
-import com.speedata.xutest.datebase.GreenDaoManager;
+import com.speedata.xutest.cache.CacheManager;
 import com.speedata.xutest.net.Constant;
 import com.speedata.xutest.net.NetApi;
 import com.speedata.xutest.utils.DeviceUtils;
 import com.speedata.xutest.utils.SPUtils;
 import com.speedata.xutest.utils.ToastUtils;
-
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,7 +24,7 @@ public class CheckPresenterImpl extends BaseMvpPresenter<InventoryFragment> impl
 
     @Override
     public void getCheckListBean() {
-
+        String cacheKey = CacheManager.createCacheKey("getCheckList");
         if ((boolean) SPUtils.get(AppFid.getInstance(), Constant.ONLINE, true)) {
 
             CheckParams params = new CheckParams();
@@ -61,16 +58,28 @@ public class CheckPresenterImpl extends BaseMvpPresenter<InventoryFragment> impl
         }
 
         else {
-            //离线，拿之前保存的数据
-            List<CheckListBeanEntity> checkListBeanEntity = GreenDaoManager.getInstance().getDao().getCheckListBeanEntityDao().loadAll();
+            CacheManager.readCache(cacheKey, CheckListEntity.class).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<CheckListEntity>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
 
-            CheckListEntity checkListEntity = new CheckListEntity();
-            checkListEntity.setErrCode("1");
-            checkListEntity.setErrMsg("");
-            checkListEntity.setSysDate("");
-            checkListEntity.setCheckListBean(checkListBeanEntity);
+                        }
 
-            getView().completeGetCheckListbean(null, checkListEntity);
+                        @Override
+                        public void onNext(CheckListEntity checkListEntity) {
+                            getView().completeGetCheckListbean(null, checkListEntity);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            getView().completeGetCheckListbean(e, null);
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
         }
 
     }

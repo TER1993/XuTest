@@ -12,7 +12,6 @@ import android.widget.Button;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.speedata.xutest.R;
 import com.speedata.xutest.base.BaseMvpFragment;
-import com.speedata.xutest.datebase.GreenDaoManager;
 import com.speedata.xutest.main.inventory.details.CheckDetailsActivity;
 import com.speedata.xutest.utils.ToastUtils;
 
@@ -67,6 +66,9 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
                mPresenter.getCheckListBean();
                update = true;
                break;
+
+               default:
+                   break;
        }
     }
 
@@ -80,7 +82,6 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
         }
         if ("1".equals(entity.getErrCode())) {
             mAdapter.replaceData(entity.getCheckListBean());
-            GreenDaoManager.saveCheckListBean(entity.getCheckListBean());
             if (update){
                 ToastUtils.showShortToastSafe("下载" + entity.getCheckListBean().size() + "个盘点任务");
                 update = false;
@@ -98,7 +99,7 @@ public class InventoryFragment extends BaseMvpFragment<InventoryFragment, CheckP
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        CheckDetailsActivity.start(mContext, mAdapter.getData().get(position).getChkId());
+        CheckDetailsActivity.start(mContext, mAdapter.getData().get(position));
     }
 
     @Override
