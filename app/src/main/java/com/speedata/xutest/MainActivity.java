@@ -12,6 +12,7 @@ import com.example.lyf.yflibrary.PermissionResult;
 import com.speedata.xutest.activity.Activity20170426;
 import com.speedata.xutest.activity.Activity20170614;
 import com.speedata.xutest.activity.Activity20170907;
+import com.speedata.xutest.activity.mvptest.Login2Activity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //将要获取的权限全放到一个字符串数组中用来动态申请
@@ -54,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn20170614.setOnClickListener(this);
         Button btn20170907 = findViewById(R.id.btn_20170907);
         btn20170907.setOnClickListener(this);
+        Button btn20171108 = findViewById(R.id.btn_20171108);
+        btn20171108.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -72,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_20170907:
                 Intent intent20170907 = new Intent(MainActivity.this, Activity20170907.class);
                 startActivity(intent20170907);
+                break;
+
+            case R.id.btn_20171108:
+                Intent intent20171108 = new Intent(MainActivity.this, Login2Activity.class);
+                startActivity(intent20171108);
                 break;
 
 

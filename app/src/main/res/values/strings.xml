@@ -119,5 +119,9 @@
     <string name="sure">确定</string>
     <string name="miss">取消</string>
     <string name="download_dept">下载部门字典</string>
+    <string name="title_activity_mvp_test">MvpTestActivity</string>
+    <string name="_password">密码</string>
+    <string name="_username">账号</string>
+    <string name="_login">登录</string>
 
 </resources>

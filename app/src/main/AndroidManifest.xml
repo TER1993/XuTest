@@ -94,43 +94,47 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Activity20170426"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Activity20170614"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Activity20170907"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Activity20170927"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/login"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".main.assets.details.EquipmentDetailsActivity"
             android:label="@string/equipment_details"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".add.AddAssetsActivity"
             android:label="@string/add_assets_info"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".main.inventory.details.CheckDetailsActivity"
             android:label="@string/lable_inventory_details"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".inventory.TakeInventoryActivity"
             android:label="@string/inventory"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mvptest.MvpTestActivity"
+            android:label="@string/title_activity_mvp_test"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.mvptest.Login2Activity"></activity>
     </application>
 
 </manifest>
