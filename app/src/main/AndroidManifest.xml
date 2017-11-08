@@ -83,7 +83,7 @@
         tools:replace="allowBackup">
         <activity
             android:name=".WelcomeActivity"
-            android:label="@string/login"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
@@ -130,11 +130,10 @@
             android:name=".inventory.TakeInventoryActivity"
             android:label="@string/inventory"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.mvptest.MvpTestActivity"
-            android:label="@string/title_activity_mvp_test"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".activity.mvptest.Login2Activity"></activity>
+
+        <activity android:name=".activity.mvptest.Login2Activity"
+            android:label="@string/mvp_test"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
