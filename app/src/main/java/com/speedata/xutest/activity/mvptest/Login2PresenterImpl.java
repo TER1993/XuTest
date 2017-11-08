@@ -36,7 +36,13 @@ public class Login2PresenterImpl extends BasePresenter<Login2Activity, Login2Mod
             return;
         }
 
-        Toast.makeText(context, "成功", Toast.LENGTH_SHORT).show();
+        if ("admin".equals(usernameString) && "0000".equals(passwordString)) {
+            Toast.makeText(context, "成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "用户名密码错误", Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
 
