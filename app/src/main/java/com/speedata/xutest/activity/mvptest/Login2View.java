@@ -7,7 +7,8 @@ package com.speedata.xutest.activity.mvptest;
  */
 
 public interface Login2View  {
-     void viewLogin(String name, String pswd);
-
+     void viewLogin();
+     void autoString(String auto);
+     void autoClearfinish();
 
 }

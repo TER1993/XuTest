@@ -125,5 +125,7 @@
     <string name="_password">密码</string>
     <string name="_username">账号</string>
     <string name="_login">登录</string>
+    <string name="_autotest">自动提示</string>
+    <string name="_clear_auto">清空自动提示</string>
 
 </resources>
