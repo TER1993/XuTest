@@ -12,6 +12,7 @@ import com.example.lyf.yflibrary.PermissionResult;
 import com.speedata.xutest.activity.Activity20170426;
 import com.speedata.xutest.activity.Activity20170614;
 import com.speedata.xutest.activity.Activity20170907;
+import com.speedata.xutest.activity.X20180206Activity;
 import com.speedata.xutest.activity.mvptest.Login2Activity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn20170907.setOnClickListener(this);
         Button btn20171108 = findViewById(R.id.btn_20171108);
         btn20171108.setOnClickListener(this);
-
-
+        Button btn20180206 = findViewById(R.id.btn_20180206);
+        btn20180206.setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent20171108);
                 break;
 
+            case R.id.btn_20180206:
+                Intent intent20180206 = new Intent(MainActivity.this, X20180206Activity.class);
+                startActivity(intent20180206);
+                break;
 
             default:
                 break;

@@ -51,6 +51,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <Button
+            app:layout_constraintBottom_toBottomOf="@+id/btn_20171108"
+            android:text="20180206扫描示例demo"
+            android:id="@+id/btn_20180206"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

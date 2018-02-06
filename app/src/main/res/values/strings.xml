@@ -127,5 +127,7 @@
     <string name="_login">登录</string>
     <string name="_autotest">自动提示</string>
     <string name="_clear_auto">清空自动提示</string>
+    <string name="scan">scan</string>
+    <string name="show_message">show_message</string>
 
 </resources>
