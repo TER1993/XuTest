@@ -15,9 +15,10 @@ import com.speedata.xutest.activity.Activity20170907;
 import com.speedata.xutest.activity.X20180206Activity;
 import com.speedata.xutest.activity.mvptest.Login2Activity;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //将要获取的权限全放到一个字符串数组中用来动态申请
-    private String[] REQUEST_PERMISSIONS = new String[]{
+    private String[] requestPermissions = new String[]{
             Manifest.permission.READ_CALENDAR, Manifest.permission.CAMERA,
             Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.RECORD_AUDIO, Manifest.permission.SEND_SMS,
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //权限获取，全success则开始初始化view进入软件，否则就退出程序在下一次启动时重新检测权限并提示获取
     private void initP() {
 
-        Permission.checkPermisson(this, REQUEST_PERMISSIONS, new PermissionResult() {
+        Permission.checkPermisson(this, requestPermissions, new PermissionResult() {
 
             @Override
             public void success() {
